@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -29,25 +29,22 @@
           </div>
           <ul>
             <li>
-              <a class="link-menu" data-scrol href="#home">HOME</a>
+              <a class="link-menu reveal-menu" data-scrol href="#home">HOME</a>
             </li>
             <li>
-              <a class="link-menu" data-scrol href="#services">SERVICES</a>
+              <a class="link-menu reveal-menu" data-scrol href="#services">SERVICES</a>
             </li>
             <li>
-              <a class="link-menu" data-scrol href="#about">ABOUT</a>
+              <a class="link-menu reveal-menu" data-scrol href="#about">ABOUT</a>
             </li>
             <li>
-              <a class="link-menu" data-scrol href="#studio">THE STUDIO</a>
+              <a class="link-menu reveal-menu" data-scrol href="#studio">THE STUDIO</a>
             </li>
             <li>
-              <a class="link-menu" data-scrol href="#photos">PHOTOS </a>
+              <a class="link-menu reveal-menu" data-scrol href="#photos">PHOTOS </a>
             </li>
             <li>
-              <a class="link-menu" data-scrol href="#contact">CONTACT</a>
-            </li>
-            <li>
-              <a class="button__info light" href="#">STORE</a>
+              <a class="button__info light reveal-menu" data-scrol href="#contact">CONTACT</a>
             </li>
           </ul>
         </nav>
@@ -63,8 +60,8 @@
        </svg>
     </a>
     <section id="home" class="home">
-      <div class="img">
-          <p class="pre">Slider 1 - pre</p>
+      <div class="full-img">
+          <p class="pretitle">Slider 1 - pre</p>
           <p class="title">Slider 1 - title</p>
       </div>
     </section>
@@ -210,12 +207,12 @@
           <div class="separate"></div>  
         </div>
         <div class="image-container">
-          <a href="#" class="image"><p class="text"></p></a>
-          <a href="#" class="image"><p class="text"></p></a>
-          <a href="#" class="image"><p class="text"></p></a>
-          <a href="#" class="image"><p class="text"></p></a>
-          <a href="#" class="image"><p class="text"></p></a>
-          <a href="#" class="image"><p class="text"></p></a>
+          <a href="#" class="image-item"><p class="text"></p></a>
+          <a href="#" class="image-item"><p class="text"></p></a>
+          <a href="#" class="image-item"><p class="text"></p></a>
+          <a href="#" class="image-item"><p class="text"></p></a>
+          <a href="#" class="image-item"><p class="text"></p></a>
+          <a href="#" class="image-item"><p class="text"></p></a>
         </div>
         <div class="load">
           <a class="button__info dark" href="/photos">Load More</a>
@@ -225,7 +222,7 @@
         <div class="testimonial">
           <img class="author-image" src="img/author/author.jpg" alt="Author" width="70px">
           <div class="testimonial-info">
-            <p class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, sint itaque. Quos modi odio voluptate ea magni quibusdam deleniti dignissimos.</p>
+            <p class="texto">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, sint itaque. Quos modi odio voluptate ea magni quibusdam deleniti dignissimos.</p>
             <p class="author">By Mark Ride</p>
           </div>
         </div>
@@ -280,18 +277,10 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/12.1.5/js/smooth-scroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/3.4.0/scrollreveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script type="text/javascript">
-      let $spinner = document.getElementById('spinner')
-      window.onload = () => {
-        $spinner.style.opacity = '0'
-        $spinner.style.visibility = 'hidden'
-        document.body.style.overflow = 'scroll'
-      }
-      let scroll = new SmoothScroll('a[href*="#"]', {
-        header: '[data-scroll-header]'
-      })
-      window.sr = ScrollReveal();
-      let $header = document.getElementById('header'),
+      let $spinner = document.getElementById('spinner'),
+          $header = document.getElementById('header'),
           $top = document.getElementById('top'),
           $services = document.getElementById('services'),
           $menu = document.getElementById('menu'),
@@ -310,13 +299,20 @@
               $menuTouchQuit.removeEventListener('touchstart', toggleMenu)
             }
           }
+      window.onload = function() {
+        $spinner.style.opacity = '0'
+        $spinner.style.visibility = 'hidden'
+      }
+      let scroll = new SmoothScroll('a[href*="#"]', {
+        header: '[data-scroll-header]'
+      })
+      window.sr = ScrollReveal();
       window.addEventListener('scroll', scrollMenu)
       function scrollMenu() {
         if (window.scrollY > 200){
           if (!$header.classList.contains('active')){
             $header.classList.add('active')
             $top.classList.add('active')
-            $services.classList.add('active')
           }
         }else if($header.classList.contains('active')){
             $header.classList.remove('active')
@@ -326,11 +322,14 @@
       media.addListener(mediaQuery)
       mediaQuery()
       scrollMenu()
-      sr.reveal('.service', { container: '#services', duration: 2000, mobile: true, viewFactor :  0.9 }, 200);
-      sr.reveal('.pre', { container: '#best-software-container', duration: 2000, mobile: true, viewFactor :  0.9 });
-      sr.reveal('.text', { container: '#best-software-container', duration: 2000, mobile: true, viewFactor :  0.9 });
-      sr.reveal('.separate', { container: '#best-software-container', duration: 2000, scale: 0.9, mobile: true, viewFactor :  0.7 });
-      sr.reveal('.img', { container: '#best-software-container', duration: 2000, mobile: true, viewFactor :  0.9 });
+      sr.reveal('.service', { duration: 1000, mobile: true, viewFactor :  0.5, beforeReveal: function (domEl) { $services.classList.add('active')} }, 200);
+      sr.reveal('.pre', { duration: 2000, mobile: true, viewFactor :  0.5 });
+      sr.reveal('.text', { duration: 2000, mobile: true, viewFactor :  0.5 });
+      sr.reveal('.separate', { duration: 2000, scale: 0.9, mobile: true, viewFactor :  0.5 });
+      sr.reveal('.img', { duration: 2000, mobile: true, viewFactor :  0.3 });
+      sr.reveal('.specification', { duration: 1000, mobile: true, viewFactor :  0.5 }, 200);
+      sr.reveal('.image-item', { duration: 1000, mobile: true, viewFactor :  0.5 }, 200);
+      sr.reveal('.max-width', { duration: 1000, mobile: true, viewFactor :  0.5 }, 200);
     </script>
   </body>
 </html>
